@@ -9,7 +9,15 @@ connection = cx_Oracle.connect (username,password,databaseName)
  
 cursor = connection.cursor()
  
-query = 'SELECT player_name, played_matches FROM (SELECT player_name, COUNT(player_name) AS played_matches FROM participant GROUP by player_name) ORDER BY played_matches'
+query = '''SELECT
+    player.player_name, played_matches
+FROM
+	player LEFT OUTER JOIN	   
+    (SELECT player_name, count(player_name) AS played_matches
+      FROM participant 
+     GROUP by player_name) temp
+        ON player.player_name = temp.player_name
+ORDER BY played_matches'''
 
 
 cursor.execute (query)
