@@ -1,6 +1,5 @@
 import cx_Oracle
 import chart_studio
-#import plotly.offline as py
 import plotly.graph_objs as go
 import chart_studio.dashboard_objs as dashboard
 import chart_studio.plotly as py
